@@ -1,0 +1,30 @@
+{
+  "name": "eslint-plugin-import-groups",
+  "version": "0.0.0",
+  "description": "Group imports statements",
+  "keywords": [
+    "eslint",
+    "eslintplugin",
+    "eslint-plugin"
+  ],
+  "author": "Dmitriy Kovalenko",
+  "main": "lib/index.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "mocha tests --recursive"
+  },
+  "dependencies": {
+    "@types/eslint": "^4.16.6",
+    "@types/node": "^11.12.1",
+    "requireindex": "~1.1.0",
+    "typescript": "^3.3.4000"
+  },
+  "devDependencies": {
+    "eslint": "~3.9.1",
+    "mocha": "^3.1.2"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "license": "ISC"
+}

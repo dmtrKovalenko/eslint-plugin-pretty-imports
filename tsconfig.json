@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "baseUrl": "./src",
+    "outDir": "./lib",
+    "allowSyntheticDefaultImports": true,
+    "lib": ["es2016"]
+  }
+}
