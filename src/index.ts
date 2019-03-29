@@ -1,4 +1,6 @@
 // @ts-ignore
-import requireIndex from 'requireindex'
+import importGroups from './rules/import-groups'
 
-export const rules = requireIndex(__dirname + "/rules")
+export const rules = {
+  "import-groups": importGroups
+}
