@@ -2,10 +2,15 @@
   "compilerOptions": {
     "strict": true,
     "module": "commonjs",
+    "target": "es2018",
     "esModuleInterop": true,
     "baseUrl": "./src",
+    "rootDir": ".",
     "outDir": "./lib",
     "allowSyntheticDefaultImports": true,
     "lib": ["es2016"]
-  }
+  },
+  "include": [
+    "src/**/*.ts"
+  ],
 }

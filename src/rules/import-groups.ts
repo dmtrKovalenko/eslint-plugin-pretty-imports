@@ -1,42 +1,46 @@
 import { Rule } from "eslint";
 import {
-  ImportDeclaration,
-  ImportSpecifier,
-  ImportNamespaceSpecifier,
-  ImportDefaultSpecifier
-} from "estree";
-
-type BaseImportSpecifier =
-  | ImportSpecifier
-  | ImportDefaultSpecifier
-  | ImportNamespaceSpecifier;
+  compareTypeWithPrevious,
+  ImportDeclarationT,
+  getImportType
+} from "../services/import-resolver";
+import { ImportDeclaration } from "estree";
 
 export default {
   schema: [],
+  meta: {
+    fixable: "code"
+  },
   create: (context: Rule.RuleContext) => {
-    let imported: BaseImportSpecifier[] = [];
-
-    function registerImport(imports: BaseImportSpecifier[]) {
-      const previousRegisteredImport = imported[imported.length - 1] 
-
-      if (
-        previousRegisteredImport &&
-        imports[0].type === 'ImportDefaultSpecifier' &&
-        previousRegisteredImport.type === 'ImportSpecifier'
-      ) {
-        context.report({
-          message: "Default and named imports should be grouped",
-          loc: imports[0].loc!,
-        })
-      }
-
-      imported = [...imported, ...imports]
-    }
-
+    const sourceCode = context.getSourceCode();
     return {
-      ImportDeclaration: (node: ImportDeclaration) => {
-        registerImport(node.specifiers)
+      ImportDeclaration: (node: ImportDeclarationT) => {
+        const { current, previous } = compareTypeWithPrevious(node);
+
+        if (
+          previous === "ImportSpecifier" &&
+          current === "ImportDefaultSpecifier"
+        ) {
+          const firstNamedImport = node.parent.body.find(
+            bodyNode =>
+              bodyNode.type === "ImportDeclaration" &&
+              getImportType(bodyNode) === "ImportSpecifier"
+          )!;
+
+          context.report({
+            loc: node.loc!,
+            message: "Default and named imports should be grouped",
+            // @ts-ignore
+            fix: fixer => [
+              fixer.remove(node),
+              fixer.insertTextBefore(
+                firstNamedImport,
+                sourceCode.getText(node) + "\n"
+              )
+            ]
+          });
+        }
       }
     } as Rule.RuleListener;
   }
-};
+} as Rule.RuleModule;

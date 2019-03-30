@@ -8,7 +8,7 @@
     "eslint-plugin"
   ],
   "author": "Dmitriy Kovalenko",
-  "main": "lib/index.js",
+  "main": "lib/src/index.js",
   "scripts": {
     "build": "tsc",
     "test": "ts-mocha __tests__/**/*.spec.ts"

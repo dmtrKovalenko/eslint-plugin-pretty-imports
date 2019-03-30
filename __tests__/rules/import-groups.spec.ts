@@ -23,20 +23,28 @@ ruleTester.run("import-groups", rule, {
     import { named, exported } from './some_module'
     import { imports } from './another_module'
     import { shouldBeAligned } from './super_another_module'
-    `,
+    `
   ],
 
   invalid: [
     {
-        code: `
+      code: `
         import { named } from './some_module'
         import React from 'react'
         import { imports } from './another_module'
         import { shouldBeAligned } from './super_another_module'
-        `,
-        errors: [{
-          message: 'Default and named imports should be grouped'
-        }]
+      `,
+      errors: [
+        {
+          message: "Default and named imports should be grouped"
+        }
+      ],
+      output: `
+        import React from 'react'
+        import { named } from './some_module'
+        import { imports } from './another_module'
+        import { shouldBeAligned } from './super_another_module'
+      `
     }
   ]
 });
