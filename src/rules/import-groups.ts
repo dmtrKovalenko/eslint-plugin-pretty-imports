@@ -9,7 +9,6 @@ export default {
     fixable: "code"
   },
   create: (context: Rule.RuleContext) => {
-    const sourceCode = context.getSourceCode();
     return {
       Program: (program: Program) => {
         const imports = program.body.filter(
@@ -30,6 +29,7 @@ export default {
 
         if (firstNotSorted) {
           const autoFix = (fixer: Rule.RuleFixer) => {
+            const sourceCode = context.getSourceCode();
             const importsStart = imports[0].range![0];
             const importsEnd = imports[imports.length - 1].range![1];
 
