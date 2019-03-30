@@ -26,17 +26,13 @@ export function getImportType(node?: ImportDeclaration) {
 
 export function getImportSortIndex(node?: ImportDeclaration) {
   switch (getImportType(node)) {
-    case 'ImportDefaultSpecifier':
-      return 1
     case 'ImportNamespaceSpecifier':
+      return 1
+    case 'ImportDefaultSpecifier':
       return 2
     case 'ImportSpecifier':
       return 3
     default:
       return 10
   }
-}
-
-export function sortImports() {
-
 }

@@ -1,6 +1,7 @@
 import { Rule } from "eslint";
-import { getImportType, getImportSortIndex } from "../services/import-resolver";
+import { getImportSortIndex } from "../services/imports";
 import { Program, ImportDeclaration } from "estree";
+import { nodesArrayToText } from "../services/eslint";
 
 export default {
   schema: [],
@@ -28,21 +29,30 @@ export default {
         });
 
         if (firstNotSorted) {
+          const autoFix = (fixer: Rule.RuleFixer) => {
+            const importsStart = imports[0].range![0];
+            const importsEnd = imports[imports.length - 1].range![1];
+
+            const sortedImports = imports.sort(
+              (a, b) => getImportSortIndex(a) - getImportSortIndex(b)
+            );
+
+            const sortedImportsText = nodesArrayToText(
+              sourceCode,
+              sortedImports,
+              source => source + "\n"
+            );
+
+            return fixer.replaceTextRange(
+              [importsStart, importsEnd],
+              sortedImportsText
+            );
+          };
+
           context.report({
+            fix: autoFix,
             loc: firstNotSorted.loc!,
-            message: "Default and named imports should be grouped",
-            fix: fixer => {
-              const importsStart = imports[0].range![0];
-              const importsEnd = imports[imports.length - 1].range![1];
-
-              const insertSortedImports = null;
-              const removeImports = fixer.removeRange([
-                importsStart,
-                importsEnd
-              ]);
-
-              return [removeImports, insertSortedImports] as any; // any required due to lack of typings
-            }
+            message: "Default and named imports should be grouped"
           });
         }
       }
