@@ -11,21 +11,15 @@ RuleTester.setDefaultConfig({
 
 var ruleTester = new RuleTester();
 ruleTester.run("import-groups", rule, {
-  valid: [
-    // `
-    // import React from 'react'
-    // import { named } from './some_module'
-    // import { imports } from './another_module'
-    // import { shouldBeAligned } from './super_another_module'
-    // `,
-    `
-    import React from 'react'
-    import { named, exported } from './some_module'
-    import { imports } from './another_module'
-    import { shouldBeAligned } from './super_another_module'
-    `
-  ],
-
+  // valid: [
+  //   `
+  //   import React from 'react'
+  //   import { named, exported } from './some_module'
+  //   import { imports } from './another_module'
+  //   import { shouldBeAligned } from './super_another_module'
+  //   `
+  // ],
+  valid: [],
   invalid: [
     {
       code: `
@@ -33,6 +27,8 @@ ruleTester.run("import-groups", rule, {
         import React from 'react'
         import { imports } from './another_module'
         import { shouldBeAligned } from './super_another_module'
+
+        const five = 5
       `,
       errors: [
         {

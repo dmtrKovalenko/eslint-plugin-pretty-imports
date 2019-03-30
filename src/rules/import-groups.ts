@@ -1,10 +1,6 @@
 import { Rule } from "eslint";
-import {
-  compareTypeWithPrevious,
-  ImportDeclarationT,
-  getImportType
-} from "../services/import-resolver";
-import { ImportDeclaration } from "estree";
+import { getImportType, getImportSortIndex } from "../services/import-resolver";
+import { Program, ImportDeclaration } from "estree";
 
 export default {
   schema: [],
@@ -14,30 +10,39 @@ export default {
   create: (context: Rule.RuleContext) => {
     const sourceCode = context.getSourceCode();
     return {
-      ImportDeclaration: (node: ImportDeclarationT) => {
-        const { current, previous } = compareTypeWithPrevious(node);
+      Program: (program: Program) => {
+        const imports = program.body.filter(
+          node => node.type === "ImportDeclaration"
+        ) as ImportDeclaration[];
 
-        if (
-          previous === "ImportSpecifier" &&
-          current === "ImportDefaultSpecifier"
-        ) {
-          const firstNamedImport = node.parent.body.find(
-            bodyNode =>
-              bodyNode.type === "ImportDeclaration" &&
-              getImportType(bodyNode) === "ImportSpecifier"
-          )!;
+        if (!imports.length) {
+          return;
+        }
 
+        const firstNotSorted = imports.find((node, i) => {
+          const nextNode = imports[i + 1];
+
+          return (
+            nextNode && getImportSortIndex(node) > getImportSortIndex(nextNode)
+          );
+        });
+
+        if (firstNotSorted) {
           context.report({
-            loc: node.loc!,
+            loc: firstNotSorted.loc!,
             message: "Default and named imports should be grouped",
-            // @ts-ignore
-            fix: fixer => [
-              fixer.remove(node),
-              fixer.insertTextBefore(
-                firstNamedImport,
-                sourceCode.getText(node) + "\n"
-              )
-            ]
+            fix: fixer => {
+              const importsStart = imports[0].range![0];
+              const importsEnd = imports[imports.length - 1].range![1];
+
+              const insertSortedImports = null;
+              const removeImports = fixer.removeRange([
+                importsStart,
+                importsEnd
+              ]);
+
+              return [removeImports, insertSortedImports] as any; // any required due to lack of typings
+            }
           });
         }
       }

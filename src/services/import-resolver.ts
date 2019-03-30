@@ -1,15 +1,7 @@
 import {
   Node,
   ImportDeclaration,
-  ImportSpecifier,
-  ImportDefaultSpecifier,
-  ImportNamespaceSpecifier
 } from "estree";
-
-type BaseImportSpecifier =
-  | ImportSpecifier
-  | ImportDefaultSpecifier
-  | ImportNamespaceSpecifier;
 
 export type ImportDeclarationT = {
   parent: {
@@ -17,16 +9,11 @@ export type ImportDeclarationT = {
   };
 } & ImportDeclaration;
 
-export function compareTypeWithPrevious(node: ImportDeclarationT) {
-  const { parent } = node;
-  const previousNode = parent.body[
-    parent.body.indexOf(node) - 1
-  ] as ImportDeclarationT;
-
-  return {
-    current: getImportType(node),
-    previous: getImportType(previousNode)
-  };
+export function getNextNode(node: ImportDeclaration) {
+  const { parent } = node as ImportDeclarationT;
+  return parent.body[
+    parent.body.indexOf(node) + 1
+  ];
 }
 
 export function getImportType(node?: ImportDeclaration) {
@@ -35,4 +22,21 @@ export function getImportType(node?: ImportDeclaration) {
   }
   
   return node.specifiers[0].type;
+}
+
+export function getImportSortIndex(node?: ImportDeclaration) {
+  switch (getImportType(node)) {
+    case 'ImportDefaultSpecifier':
+      return 1
+    case 'ImportNamespaceSpecifier':
+      return 2
+    case 'ImportSpecifier':
+      return 3
+    default:
+      return 10
+  }
+}
+
+export function sortImports() {
+
 }
