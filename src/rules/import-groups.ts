@@ -40,7 +40,8 @@ export default {
             const sortedImportsText = nodesArrayToText(
               sourceCode,
               sortedImports,
-              source => source + "\n"
+              (source, index) =>
+                index < sortedImports.length - 1 ? source + "\n" : source
             );
 
             return fixer.replaceTextRange(

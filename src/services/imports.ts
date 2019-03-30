@@ -1,7 +1,4 @@
-import {
-  Node,
-  ImportDeclaration,
-} from "estree";
+import { Node, ImportDeclaration } from "estree";
 
 export type ImportDeclarationT = {
   parent: {
@@ -11,28 +8,26 @@ export type ImportDeclarationT = {
 
 export function getNextNode(node: ImportDeclaration) {
   const { parent } = node as ImportDeclarationT;
-  return parent.body[
-    parent.body.indexOf(node) + 1
-  ];
+  return parent.body[parent.body.indexOf(node) + 1];
 }
 
 export function getImportType(node?: ImportDeclaration) {
   if (!node) {
-    return null
+    return null;
   }
-  
+
   return node.specifiers[0].type;
 }
 
 export function getImportSortIndex(node?: ImportDeclaration) {
   switch (getImportType(node)) {
-    case 'ImportNamespaceSpecifier':
-      return 1
-    case 'ImportDefaultSpecifier':
-      return 2
-    case 'ImportSpecifier':
-      return 3
+    case "ImportNamespaceSpecifier":
+      return 1;
+    case "ImportDefaultSpecifier":
+      return 2;
+    case "ImportSpecifier":
+      return 3;
     default:
-      return 10
+      return 10;
   }
 }
