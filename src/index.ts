@@ -1,5 +1,5 @@
-import importGroups from "./rules/import-groups";
+import sorted from "./rules/sorted";
 
 export const rules = {
-  "import-groups": importGroups
+  sorted: sorted
 };

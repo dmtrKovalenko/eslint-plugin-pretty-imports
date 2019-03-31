@@ -1,5 +1,5 @@
 import { RuleTester } from "eslint";
-import rule from "../../src/rules/import-groups";
+import rule from "../../src/rules/sorted";
 
 // @ts-ignore
 RuleTester.setDefaultConfig({
