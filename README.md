@@ -1,4 +1,4 @@
-# eslint-plugin-pretty-imports
+# pretty-imports 
 
 Automatically prettify import statements. No more mixes of default and named imports. 
 
