@@ -1,51 +1,30 @@
-# eslint-plugin-import-groups
+# eslint-plugin-pretty-imports
 
-Group imports statements
+Automatically prettify import statements. No more mixes of default and named imports.
 
 ## Installation
 
-You'll first need to install [ESLint](http://eslint.org):
-
 ```
-$ npm i eslint --save-dev
-```
+npm install eslint-plugin-pretty-imports --save-dev
 
-Next, install `eslint-plugin-import-groups`:
-
-```
-$ npm install eslint-plugin-import-groups --save-dev
+yarn add --dev eslint-plugin-pretty-imports
 ```
 
-**Note:** If you installed ESLint globally (using the `-g` flag) then you must also install `eslint-plugin-import-groups` globally.
+**Note:** If you installed ESLint globally (using the `-g` flag) then you must also install `eslint-plugin-pretty-imports` globally.
 
 ## Usage
 
-Add `import-groups` to the plugins section of your `.eslintrc` configuration file. You can omit the `eslint-plugin-` prefix:
+Add `pretty-imports` to the plugins section of your `.eslintrc` configuration file. You can omit the `eslint-plugin-` prefix:
 
 ```json
 {
-    "plugins": [
-        "import-groups"
-    ]
-}
-```
-
-
-Then configure the rules you want to use under the rules section.
-
-```json
-{
-    "rules": {
-        "import-groups/rule-name": 2
-    }
+  "plugins": ["pretty-imports"],
+  "rules": {
+    "pretty-imports/sorted": 2
+  }
 }
 ```
 
 ## Supported Rules
 
-* Fill in provided rules here
-
-
-
-
-
+- Fill in provided rules here

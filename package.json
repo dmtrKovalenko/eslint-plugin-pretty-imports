@@ -1,7 +1,7 @@
 {
-  "name": "eslint-plugin-import-groups",
+  "name": "eslint-plugin-pretty-imports",
   "version": "0.0.1",
-  "description": "Group imports statements",
+  "description": "Eslint plugin to prettify import statements",
   "keywords": [
     "eslint",
     "eslintplugin",
