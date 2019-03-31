@@ -2,6 +2,8 @@
 
 Automatically prettify import statements. No more mixes of default and named imports. 
 
+![Demo](https://im5.ezgif.com/tmp/ezgif-5-7d4bfba2a8f9.gif)
+
 Perfectly works in addition to prettier and typescript.
 
 ## Installation
