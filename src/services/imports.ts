@@ -1,16 +1,5 @@
-import { Node, ImportDeclaration } from "estree";
 import { SourceCode } from "eslint";
-
-export type ImportDeclarationT = {
-  parent: {
-    body: Node[];
-  };
-} & ImportDeclaration;
-
-export function getNextNode(node: ImportDeclaration) {
-  const { parent } = node as ImportDeclarationT;
-  return parent.body[parent.body.indexOf(node) + 1];
-}
+import { ImportDeclaration } from "estree";
 
 export function getImportType(node?: ImportDeclaration) {
   if (!node) {
