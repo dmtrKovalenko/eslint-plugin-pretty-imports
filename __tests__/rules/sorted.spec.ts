@@ -1,7 +1,7 @@
 import { RuleTester } from "eslint";
 import rule from "../../src/rules/sorted";
 
-// @ts-ignore
+// @ts-ignorex
 RuleTester.setDefaultConfig({
   parserOptions: {
     ecmaVersion: 6,
@@ -10,7 +10,7 @@ RuleTester.setDefaultConfig({
 });
 
 var ruleTester = new RuleTester();
-ruleTester.run("import-groups", rule, {
+ruleTester.run("sorted", rule, {
   valid: [
     `
 import React from 'react'
