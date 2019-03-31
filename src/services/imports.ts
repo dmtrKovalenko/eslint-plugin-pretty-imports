@@ -1,4 +1,5 @@
 import { Node, ImportDeclaration } from "estree";
+import { SourceCode } from "eslint";
 
 export type ImportDeclarationT = {
   parent: {
@@ -19,15 +20,29 @@ export function getImportType(node?: ImportDeclaration) {
   return node.specifiers[0].type;
 }
 
-export function getImportSortIndex(node?: ImportDeclaration) {
+export const createCalculateSortIndex = (
+  sourceCode: SourceCode,
+  options: {
+    disableLineSorts: boolean;
+  }
+) => (node?: ImportDeclaration) => {
+  const includeLineLength = (initialIndex: number) => {
+    if (options.disableLineSorts) {
+      return initialIndex;
+    }
+
+    const lineLengthIndex = sourceCode.getText(node).length / 100;
+    return initialIndex + lineLengthIndex;
+  };
+
   switch (getImportType(node)) {
     case "ImportNamespaceSpecifier":
-      return 1;
+      return includeLineLength(1);
     case "ImportDefaultSpecifier":
-      return 2;
+      return includeLineLength(2);
     case "ImportSpecifier":
-      return 3;
+      return includeLineLength(3);
     default:
-      return 10;
+      return 100;
   }
-}
+};

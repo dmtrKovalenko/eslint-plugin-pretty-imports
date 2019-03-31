@@ -11,21 +11,20 @@ RuleTester.setDefaultConfig({
 
 var ruleTester = new RuleTester();
 ruleTester.run("import-groups", rule, {
-  // valid: [
-  //   `
-  //   import React from 'react'
-  //   import { named, exported } from './some_module'
-  //   import { imports } from './another_module'
-  //   import { shouldBeAligned } from './super_another_module'
-  //   `
-  // ],
-  valid: [],
+  valid: [
+    `
+import React from 'react'
+import { imports } from './another_module'
+import { named, exported } from './some_module'
+import { shouldBeAligned } from './super_another_module'
+`
+  ],
   invalid: [
     {
       code: `
 import { named } from './some_module'
 import React from 'react' 
-import { imports } from './another_module'
+import { imports, andAlsoLongImportsThatTakesSpace } from './another_module'
 import { shouldBeAligned } from './super_another_module'
 
 const five = 5`,
@@ -37,8 +36,8 @@ const five = 5`,
       output: `
 import React from 'react'
 import { named } from './some_module'
-import { imports } from './another_module'
 import { shouldBeAligned } from './super_another_module'
+import { imports, andAlsoLongImportsThatTakesSpace } from './another_module'
 
 const five = 5`
     }

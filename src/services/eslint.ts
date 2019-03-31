@@ -1,11 +1,10 @@
 import { Node } from "estree";
 import { SourceCode } from "eslint";
 
-export function nodesArrayToText(
-  sourceCode: SourceCode,
+export const nodesArrayToText = (sourceCode: SourceCode) => (
   nodes: Node[],
   pipe?: (source: string, index: number) => string
-) {
+) => {
   return nodes.reduce((value, node) => {
     let astSource = sourceCode.getText(node);
     if (pipe) {
@@ -17,4 +16,4 @@ export function nodesArrayToText(
 
     return value + astSource;
   }, "");
-}
+};

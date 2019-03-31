@@ -1,14 +1,27 @@
 import { Rule } from "eslint";
-import { getImportSortIndex } from "../services/imports";
-import { Program, ImportDeclaration } from "estree";
 import { nodesArrayToText } from "../services/eslint";
+import { Program, ImportDeclaration } from "estree";
+import { createCalculateSortIndex } from "../services/imports";
+
+const opts = {
+  DISABLE_LINE_SORTS: "disable-line-length-sort"
+};
 
 export default {
-  schema: [],
   meta: {
     fixable: "code"
   },
+  schema: [
+    {
+      enum: [opts.DISABLE_LINE_SORTS]
+    }
+  ],
   create: (context: Rule.RuleContext) => {
+    const sourceCode = context.getSourceCode();
+    const calculateSortIndex = createCalculateSortIndex(sourceCode, {
+      disableLineSorts: context.options.includes(opts.DISABLE_LINE_SORTS)
+    });
+
     return {
       Program: (program: Program) => {
         const imports = program.body.filter(
@@ -23,23 +36,22 @@ export default {
           const nextNode = imports[i + 1];
 
           return (
-            nextNode && getImportSortIndex(node) > getImportSortIndex(nextNode)
+            nextNode && calculateSortIndex(node) > calculateSortIndex(nextNode)
           );
         });
 
         if (firstNotSorted) {
           const autoFix = (fixer: Rule.RuleFixer) => {
-            const sourceCode = context.getSourceCode();
             const importsStart = imports[0].range![0];
             const importsEnd = imports[imports.length - 1].range![1];
 
             const sortedImports = imports.sort(
-              (a, b) => getImportSortIndex(a) - getImportSortIndex(b)
+              (a, b) => calculateSortIndex(a) - calculateSortIndex(b)
             );
 
-            const sortedImportsText = nodesArrayToText(
-              sourceCode,
+            const sortedImportsText = nodesArrayToText(sourceCode)(
               sortedImports,
+              // do not add additional \n to the end of imports
               (source, index) =>
                 index < sortedImports.length - 1 ? source + "\n" : source
             );
