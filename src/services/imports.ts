@@ -2,7 +2,7 @@ import { SourceCode } from "eslint";
 import { ImportDeclaration } from "estree";
 
 export function getImportType(node?: ImportDeclaration) {
-  if (!node) {
+  if (!node || !node.specifiers || !node.specifiers.length) {
     return null;
   }
   // treat import React, { useState } from 'react' as defaults by the type of the first specifier
