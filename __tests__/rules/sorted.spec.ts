@@ -1,5 +1,6 @@
 import rule from "../../src/rules/sorted";
 import ruleTester from "../rule-tester";
+import { messages } from "../../src/constants/messages";
 
 ruleTester.run("sorted", rule, {
   valid: [
@@ -32,7 +33,7 @@ import { imports, andAlsoLongImportsThatTakesSpace } from './another_module'
 const five = 5`,
       errors: [
         {
-          message: "Default and named imports should be grouped"
+          message: messages.NOT_SORTED
         }
       ]
     }
@@ -62,7 +63,7 @@ import { /* named */ } from './some_module'
 const five = 5`,
       errors: [
         {
-          message: "Default and named imports should be grouped"
+          message: messages.NOT_SORTED
         }
       ]
     }

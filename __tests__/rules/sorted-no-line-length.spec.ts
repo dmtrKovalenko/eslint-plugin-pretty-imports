@@ -1,5 +1,6 @@
 import rule from "../../src/rules/sorted";
 import ruleTester from "../rule-tester";
+import { messages } from "../../src/constants/messages";
 
 ruleTester.run("sorted (no-line-length-sort)", rule, {
   valid: [
@@ -24,7 +25,7 @@ import { shouldBeAligned } from './super_another_module'
 `,
       errors: [
         {
-          message: "Default and named imports should be grouped"
+          message: messages.NOT_SORTED
         }
       ],
       output: `

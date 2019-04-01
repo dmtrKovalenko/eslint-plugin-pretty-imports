@@ -2,6 +2,7 @@ import { Rule } from "eslint";
 import { nodesArrayToText, getNodeEndPosition } from "../services/eslint";
 import { Program, ImportDeclaration } from "estree";
 import { createCalculateSortIndex } from "../services/imports";
+import { messages } from "../constants/messages";
 
 const opts = {
   DISABLE_LINE_SORTS: "no-line-length-sort"
@@ -68,7 +69,7 @@ export default {
           context.report({
             fix: autoFix,
             loc: firstNotSorted.loc!,
-            message: "Default and named imports should be grouped"
+            message: messages.NOT_SORTED
           });
         }
       }
