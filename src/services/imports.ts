@@ -5,7 +5,7 @@ export function getImportType(node?: ImportDeclaration) {
   if (!node) {
     return null;
   }
-
+  // treat import React, { useState } from 'react' as defaults by the type of the first specifier
   return node.specifiers[0].type;
 }
 
