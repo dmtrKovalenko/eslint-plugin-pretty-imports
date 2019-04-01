@@ -1,0 +1,28 @@
+version: 2
+jobs:
+  build_and_test:
+    docker:
+      - image: circleci/node:lts
+        environment:
+          ## this enables colors in the output
+          TERM: xterm
+    working_directory: ~/eslint-plugin-import-groups
+
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-deps-{{ .Branch }}-{{ checksum "package.json" }}
+            - v1-deps-{{ .Branch }}
+            - v1-deps
+      - run:
+          name: Install Dependencies
+          command: yarn
+      - save_cache:
+          key: v1-deps-{{ .Branch }}-{{ checksum "package.json" }}
+          paths:
+            - ~/.npm
+            - ~/.cache
+      - run: yarn build
+      - run: yarn test
+      - run: npx codecov
