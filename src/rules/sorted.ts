@@ -1,5 +1,5 @@
 import { Rule } from "eslint";
-import { nodesArrayToText } from "../services/eslint";
+import { nodesArrayToText, getNodeEndPosition } from "../services/eslint";
 import { Program, ImportDeclaration } from "estree";
 import { createCalculateSortIndex } from "../services/imports";
 
@@ -43,7 +43,10 @@ export default {
         if (firstNotSorted) {
           const autoFix = (fixer: Rule.RuleFixer) => {
             const importsStart = imports[0].range![0];
-            const importsEnd = imports[imports.length - 1].range![1];
+            const importsEnd = getNodeEndPosition(
+              sourceCode,
+              imports[imports.length - 1]
+            );
 
             const sortedImports = imports.sort(
               (a, b) => calculateSortIndex(a) - calculateSortIndex(b)
