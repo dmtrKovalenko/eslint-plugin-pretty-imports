@@ -4,6 +4,7 @@ import ruleTester from "../rule-tester";
 ruleTester.run("sorted", rule, {
   valid: [
     `
+import * as smth from 'smth'
 import React from 'react'
 import { imports } from './another_module'
 import { named, exported } from './some_module'
