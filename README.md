@@ -1,5 +1,10 @@
 # pretty-imports 
 
+[![npm package](https://img.shields.io/npm/v/eslint-plugin-pretty-imports.svg)](https://www.npmjs.org/package/eslint-plugin-pretty-imports)
+[![codecov](https://codecov.io/gh/dmtrKovalenko/eslint-plugin-pretty-imports/branch/master/graph/badge.svg)](https://codecov.io/gh/dmtrKovalenko/eslint-plugin-pretty-imports)
+[![CircleCI](https://circleci.com/gh/dmtrKovalenko/eslint-plugin-pretty-imports.svg?style=svg)](https://circleci.com/gh/dmtrKovalenko/eslint-plugin-pretty-imports)
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
+
 No more mixes of default and named imports. Automatically prettify and sort your import statements.
 
 ![Demo](https://github.com/dmtrKovalenko/eslint-plugin-pretty-imports/blob/master/demo.gif?raw=true)
