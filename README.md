@@ -34,9 +34,9 @@ Add `pretty-imports` to the plugins section of your `.eslintrc` configuration fi
 This plugin provides only 1 rule, that fully takes care of your imports. But you can also customize the behavior thanks to eslint rule options. 
 
 ```json
-  "rules": {
-    "pretty-imports/sorted": ["error", "no-line-length-sort"]
-  }
+"rules": {
+  "pretty-imports/sorted": ["error", "no-line-length-sort"]
+}
 ```
 
 Options allows to **disable** some functionality. Here is a list
