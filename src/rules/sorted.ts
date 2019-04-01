@@ -4,7 +4,7 @@ import { Program, ImportDeclaration } from "estree";
 import { createCalculateSortIndex } from "../services/imports";
 
 const opts = {
-  DISABLE_LINE_SORTS: "disable-line-length-sort"
+  DISABLE_LINE_SORTS: "no-line-length-sort"
 };
 
 export default {
