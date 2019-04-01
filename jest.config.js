@@ -1,6 +1,6 @@
 module.exports = {
+  rootDir: ".",
   preset: "ts-jest",
   testEnvironment: "node",
-  collectCoverage: true,
   testMatch: ["<rootDir>/__tests__/**/*.spec.ts"]
 };
