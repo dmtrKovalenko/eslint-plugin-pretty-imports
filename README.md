@@ -2,7 +2,7 @@
 
 Automatically prettify import statements. No more mixes of default and named imports. 
 
-![Demo](https://im5.ezgif.com/tmp/ezgif-5-7d4bfba2a8f9.gif)
+![Demo](https://github.com/dmtrKovalenko/eslint-plugin-pretty-imports/blob/master/demo.gif?raw=true)
 
 Perfectly works in addition to prettier and typescript.
 
