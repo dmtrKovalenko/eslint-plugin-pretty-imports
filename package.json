@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-pretty-imports",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Eslint plugin to prettify import statements",
   "keywords": [
     "eslint",
@@ -11,7 +11,8 @@
   "main": "lib/src/index.js",
   "scripts": {
     "build": "tsc",
-    "test": "jest"
+    "test": "jest",
+    "test:coverage": "jest --coverage"
   },
   "husky": {
     "hooks": {
@@ -29,7 +30,7 @@
     "@types/jest": "^24.0.11",
     "@types/node": "^11.12.1",
     "codecov": "^3.2.0",
-    "eslint": "~3.9.1",
+    "eslint": "^5.16.0",
     "husky": "^1.3.1",
     "jest": "^24.5.0",
     "lint-staged": "^8.1.5",

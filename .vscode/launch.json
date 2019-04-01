@@ -7,15 +7,27 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Mocha (Test single file)",
-      "runtimeArgs": [
-        "${workspaceRoot}/node_modules/.bin/ts-mocha",
+      "name": "Debug Jest Tests",
+      "cwd": "${workspaceFolder}",
+      "args": [
         "--inspect-brk",
-        "${relativeFile}",
+        "${workspaceRoot}/node_modules/.bin/jest",
+        "--runInBand",
+        "--config",
+        "${workspaceRoot}/jest.config.js"
       ],
+      "windows": {
+        "args": [
+          "--inspect-brk",
+          "${workspaceRoot}/node_modules/jest/bin/jest.js",
+          "--runInBand",
+          "--config",
+          "${workspaceRoot}/jest.config.js"
+        ]
+      },
+      "sourceMaps": true,
       "console": "integratedTerminal",
-      "internalConsoleOptions": "neverOpen",
-      "port": 9229
+      "internalConsoleOptions": "neverOpen"
     }
   ]
 }
