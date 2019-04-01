@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-pretty-imports",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Eslint plugin to prettify import statements",
   "keywords": [
     "eslint",
