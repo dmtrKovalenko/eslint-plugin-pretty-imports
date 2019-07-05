@@ -6,8 +6,9 @@
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
 No more mixes of default and named imports. Automatically prettify and sort your import statements.
+> 🌟 Perfectly works in addition to [prettier](https://github.com/prettier/prettier) and [typescript](https://www.typescriptlang.org/). 
 
-## Before
+## 😨 Before
 ```js
 import * as React from 'react';
 import { runKeyHandler } from '../../_shared/hooks/useKeyDown';
@@ -25,7 +26,7 @@ import Day from './Day';
 import { withUtils, WithUtilsProps } from '../../_shared/WithUtils';
 ```
 
-## After
+## 😊 After
 ```js
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
@@ -42,9 +43,7 @@ import { findClosestEnabledDate } from '../../_helpers/date-utils';
 import { withUtils, WithUtilsProps } from '../../_shared/WithUtils';
 ```
 
-🌟 Perfectly works in addition to [prettier](https://github.com/prettier/prettier) and [typescript](https://www.typescriptlang.org/). 
-
-## Installation
+## 💿 Installation
 
 ```
 npm install eslint-plugin-pretty-imports --save-dev
@@ -54,7 +53,7 @@ yarn add --dev eslint-plugin-pretty-imports
 
 **Note:** If you installed ESLint globally (using the `-g` flag) then you must also install `eslint-plugin-pretty-imports` globally.
 
-## Usage
+## 🌚 Usage
 
 Add `pretty-imports` to the plugins section of your `.eslintrc` configuration file. You can omit the `eslint-plugin-` prefix:
 
@@ -67,7 +66,7 @@ Add `pretty-imports` to the plugins section of your `.eslintrc` configuration fi
 }
 ```
 
-## Customization
+## 🔧 Customization
 
 This plugin provides only 1 rule, that fully takes care of your imports. But you can also customize the behavior thanks to eslint rule options. 
 
