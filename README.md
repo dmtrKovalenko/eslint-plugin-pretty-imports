@@ -22,6 +22,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import SlideTransition, { SlideDirection } from './SlideTransition';
 import { withStyles, WithStyles } from '@material-ui/core/styles';
 import { findClosestEnabledDate } from '../../_helpers/date-utils';
+// TODO smth
 import Day from './Day';
 import { withUtils, WithUtilsProps } from '../../_shared/WithUtils';
 ```
@@ -30,6 +31,7 @@ import { withUtils, WithUtilsProps } from '../../_shared/WithUtils';
 ```js
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
+// TODO smth
 import Day from './Day';
 import DayWrapper from './DayWrapper';
 import CalendarHeader from './CalendarHeader';
