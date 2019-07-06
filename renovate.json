@@ -1,7 +1,5 @@
 {
-  "extends": [
-    "config:base"
-  ],
+  "extends": ["config:base"],
   "automerge": true,
   "major": {
     "automerge": false
@@ -10,7 +8,5 @@
   "updateNotScheduled": false,
   "timezone": "Europe/Kiev",
   "lockFileMaintenance": { "enabled": false },
-  "schedule": [
-    "every weekend"
-  ],
+  "schedule": ["every weekend"]
 }
