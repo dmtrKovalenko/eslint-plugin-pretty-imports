@@ -1,8 +1,8 @@
 import { Rule } from "eslint";
-import { nodesArrayToText, getNodeEndPosition } from "../services/eslint";
+import { messages } from "../constants/messages";
 import { Program, ImportDeclaration } from "estree";
 import { createCalculateSortIndex } from "../services/imports";
-import { messages } from "../constants/messages";
+import { nodesArrayToText, getNodeEndPosition } from "../services/eslint";
 
 const opts = {
   DISABLE_LINE_SORTS: "no-line-length-sort"
