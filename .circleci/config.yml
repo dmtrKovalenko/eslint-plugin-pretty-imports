@@ -23,6 +23,7 @@ jobs:
           paths:
             - ~/.npm
             - ~/.cache
+      - run: yarn lint
       - run: yarn build
       - run: yarn test:coverage
       - run: npx codecov

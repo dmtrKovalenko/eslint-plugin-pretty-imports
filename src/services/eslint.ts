@@ -1,5 +1,5 @@
-import { Node, Comment } from "estree";
 import { SourceCode } from "eslint";
+import { Node, Comment } from "estree";
 
 function getFullCommentText(comment: Comment) {
   return comment.type === "Line"
