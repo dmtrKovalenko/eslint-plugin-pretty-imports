@@ -41,7 +41,7 @@
     "lint-staged": "9.2.4",
     "prettier": "1.18.2",
     "ts-jest": "24.0.2",
-    "typescript": "3.5.3"
+    "typescript": "3.6.2"
   },
   "engines": {
     "node": ">=0.10.0"
