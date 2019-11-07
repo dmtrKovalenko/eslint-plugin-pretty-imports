@@ -19,12 +19,14 @@ import { shouldBeAligned } from './super_another_module'
 import { named } from './some_module'
 import React from 'react'
 import { imports, andAlsoLongImportsThatTakesSpace } from './another_module'
-import * as smth from 'smth'
+import * as smth from 'smth';
 import { shouldBeAligned } from './super_another_module'
+import 'someFile.scss'
 
 const five = 5`,
       output: `
-import * as smth from 'smth'
+import 'someFile.scss'
+import * as smth from 'smth';
 import React from 'react'
 import { named } from './some_module'
 import { shouldBeAligned } from './super_another_module'
@@ -50,7 +52,7 @@ import { imports } from './another_module'`
     {
       // ensure that comments are moved properly
       code: `
-import { /* named */ } from './some_module'
+import { /* named, */ Import } from './some_module'
 /** leading comment as block */
 import React from 'react' // trailing comment
 
@@ -58,7 +60,7 @@ const five = 5`,
       output: `
 /** leading comment as block */
 import React from 'react' // trailing comment
-import { /* named */ } from './some_module'
+import { /* named, */ Import } from './some_module'
 
 const five = 5`,
       errors: [

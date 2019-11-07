@@ -2,9 +2,18 @@ import { SourceCode } from "eslint";
 import { ImportDeclaration } from "estree";
 
 export function getImportType(node?: ImportDeclaration) {
-  if (!node || !node.specifiers || !node.specifiers.length) {
+  if (!node) {
     return null;
   }
+
+  if (!node.specifiers || !node.specifiers.length) {
+    if (node.type === "ImportDeclaration") {
+      return "ImportFileSpecifier";
+    }
+
+    return null;
+  }
+
   // treat import React, { useState } from 'react' as defaults by the type of the first specifier
   return node.specifiers[0].type;
 }
@@ -25,12 +34,14 @@ export const createCalculateSortIndex = (
   };
 
   switch (getImportType(node)) {
-    case "ImportNamespaceSpecifier":
+    case "ImportFileSpecifier":
       return includeLineLength(1);
-    case "ImportDefaultSpecifier":
+    case "ImportNamespaceSpecifier":
       return includeLineLength(2);
-    case "ImportSpecifier":
+    case "ImportDefaultSpecifier":
       return includeLineLength(3);
+    case "ImportSpecifier":
+      return includeLineLength(4);
     default:
       return 100;
   }
