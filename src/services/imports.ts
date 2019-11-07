@@ -2,6 +2,8 @@ import { SourceCode } from "eslint";
 import { ImportDeclaration } from "estree";
 
 export function getImportType(node?: ImportDeclaration) {
+  /* istanbul ignore if */
+
   if (!node) {
     return null;
   }
@@ -11,6 +13,7 @@ export function getImportType(node?: ImportDeclaration) {
       return "ImportFileSpecifier";
     }
 
+    /* istanbul ignore next */
     return null;
   }
 

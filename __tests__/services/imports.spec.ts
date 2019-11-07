@@ -21,12 +21,6 @@ const calculateMock = (sourceTest: string) => {
   return createCalculateSortIndex(sourceCodeMock, { disableLineSorts: false });
 };
 
-test("getImportType", () => {
-  expect(
-    getImportType({ ...createFakeNode("ImportSpecifier"), specifiers: [] })
-  ).toBe("ImportFileSpecifier");
-});
-
 test("calculateSortingIndex", () => {
   expect(calculateMock("string")(createFakeNode("ImportSpecifier"))).toBe(4.06);
   expect(
