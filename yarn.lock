@@ -1369,10 +1369,10 @@ eslint-config-prettier@6.5.0:
   dependencies:
     get-stdin "^6.0.0"
 
-eslint-plugin-pretty-imports@1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-pretty-imports/-/eslint-plugin-pretty-imports-1.0.2.tgz#35a1fabdc4f056e0b427c5690c95bce5cdc22bfb"
-  integrity sha512-FHlCeSeFCsvaSWhP9s42t5zDCzi9C+cCYTS4Xbge5fFNYYV3OlLyfpd/38HIc6x5uIw/LDkqZRFZ+BglaHbXuA==
+eslint-plugin-pretty-imports@1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-pretty-imports/-/eslint-plugin-pretty-imports-1.1.0.tgz#e6fded847d9e56480e6527be5103a21e1e4adda7"
+  integrity sha512-JK3F9h96myQLHtnbyBZZAFSB3FJyy8VpSPuERySUqJiSLua2k4yHRFYxnX5f36s+o+jRk2PSoB8qgHVor5+cNg==
 
 eslint-scope@^5.0.0:
   version "5.0.0"
