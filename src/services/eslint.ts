@@ -15,13 +15,20 @@ const wrapSourceWithLeadingComments = (source: string, comments: Comment[]) => {
   return commentText + source;
 };
 
+function getTrailingCommentsFromSameLine(sourceCode: SourceCode, node: Node) {
+  return sourceCode
+    .getCommentsAfter(node)
+    .filter(comment => comment.loc?.start.line === node.loc?.start.line);
+}
+
 export const nodesArrayToText = (sourceCode: SourceCode) => (
   nodes: Node[],
   pipe?: (source: string, index: number) => string
 ) => {
   return nodes.reduce((value, node) => {
     let astSource = sourceCode.getText(node);
-    const trailingComments = sourceCode.getCommentsAfter(node);
+    const trailingComments = getTrailingCommentsFromSameLine(sourceCode, node);
+
     const leadingComments = sourceCode
       .getCommentsBefore(node)
       .filter(comment => comment.loc?.start.line !== 1);
@@ -33,7 +40,7 @@ export const nodesArrayToText = (sourceCode: SourceCode) => (
     if (trailingComments.length) {
       trailingComments
         // Eslint treats block comments (/* */) as trailing even if they are on the previous line
-        .filter(trailing => trailing.loc!.start.column > 0)
+        // .filter(trailing => trailing.loc!.start.column > 0)
         .forEach(comment => {
           astSource = astSource + " " + getFullCommentText(comment);
         });
@@ -48,7 +55,7 @@ export const nodesArrayToText = (sourceCode: SourceCode) => (
 };
 
 export const getNodeEndPosition = (sourceCode: SourceCode, node: Node) => {
-  const trailingComments = sourceCode.getCommentsAfter(node);
+  const trailingComments = getTrailingCommentsFromSameLine(sourceCode, node);
   if (trailingComments && trailingComments.length) {
     return trailingComments[trailingComments.length - 1]!.range![1];
   }
