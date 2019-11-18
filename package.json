@@ -13,6 +13,7 @@
     "build": "tsc",
     "test": "jest",
     "lint": "yarn eslint ./src/**/*.ts",
+    "release": "yarn test && yarn build && yarn publish && git push && git push --tags",
     "test:coverage": "jest --coverage"
   },
   "husky": {
