@@ -21,8 +21,10 @@ export const nodesArrayToText = (sourceCode: SourceCode) => (
 ) => {
   return nodes.reduce((value, node) => {
     let astSource = sourceCode.getText(node);
-    const leadingComments = sourceCode.getCommentsBefore(node);
     const trailingComments = sourceCode.getCommentsAfter(node);
+    const leadingComments = sourceCode
+      .getCommentsBefore(node)
+      .filter(comment => comment.loc?.start.line !== 1);
 
     if (leadingComments.length) {
       astSource = wrapSourceWithLeadingComments(astSource, leadingComments);
@@ -38,10 +40,7 @@ export const nodesArrayToText = (sourceCode: SourceCode) => (
     }
 
     if (pipe) {
-      astSource = pipe(
-        astSource,
-        nodes.indexOf(node)
-      );
+      astSource = pipe(astSource, nodes.indexOf(node));
     }
 
     return value + astSource;
