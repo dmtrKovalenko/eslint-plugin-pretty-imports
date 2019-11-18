@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-pretty-imports",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "Eslint plugin to prettify import statements",
   "keywords": [
     "eslint",
@@ -38,10 +38,10 @@
     "eslint-plugin-pretty-imports": "1.1.0",
     "husky": "3.0.9",
     "jest": "24.9.0",
-    "lint-staged": "9.4.3",
-    "prettier": "1.19.1",
+    "lint-staged": "9.4.2",
+    "prettier": "^1.19.1",
     "ts-jest": "24.1.0",
-    "typescript": "3.7.2"
+    "typescript": "^3.7.2"
   },
   "engines": {
     "node": ">=0.10.0"
