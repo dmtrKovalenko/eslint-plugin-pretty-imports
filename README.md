@@ -68,6 +68,16 @@ Add `pretty-imports` to the plugins section of your `.eslintrc` configuration fi
 }
 ```
 
+## 🦆 Sorting 
+
+A little about the sorting logic. This package takes the import type as a first parameter to sort. We sort import groups in the following order: 
+ 1. `import 'anyfile'`
+ 2. `import * as anything from 'anywhere'` 
+ 3. `import default from 'anywhere'`
+ 4. `import { anything } from 'anywhere`
+
+And then we are sorting imports **by line length** inside each group. It needs only to improve the visual readability of the imports section. This behavior can be disabled by `"no-line-length-sort"` rule option.
+
 ## 🔧 Customization
 
 This plugin provides only 1 rule, that fully takes care of your imports. But you can also customize the behavior thanks to eslint rule options. 
