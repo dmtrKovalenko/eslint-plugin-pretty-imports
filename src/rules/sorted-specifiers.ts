@@ -1,6 +1,6 @@
 import { Rule } from "eslint";
 import { messages } from "../constants/messages";
-import { Program, ImportDeclaration } from "estree";
+import { ImportDeclaration } from "estree";
 import { nodesArrayToText, getNodeEndPosition } from "../services/eslint";
 import {
   getFirstNotSorted,
@@ -31,52 +31,43 @@ export default {
     );
 
     return {
-      Program: (program: Program) => {
-        const imports = program.body.filter(
-          (node) => node.type === "ImportDeclaration"
-        ) as ImportDeclaration[];
-
-        if (!imports.length) {
-          return;
-        }
-
-        const firstNotSorted = imports.find((node) =>
-          getFirstNotSorted(node.specifiers, calculateSpecifierSortIndex)
+      ImportDeclaration: (node: ImportDeclaration) => {
+        const specifiers = node.specifiers;
+        const firstNotSorted = getFirstNotSorted(
+          specifiers,
+          calculateSpecifierSortIndex
         );
 
         if (firstNotSorted) {
           const autoFix = (fixer: Rule.RuleFixer) => {
-            const importsStart = imports[0].range![0];
-            const importsEnd = getNodeEndPosition(
+            const specifiersStart = specifiers[0].range![0];
+            const specifiersEnd = getNodeEndPosition(
               sourceCode,
-              imports[imports.length - 1]
+              specifiers[specifiers.length - 1]
             );
 
-            imports.forEach((node) =>
-              node.specifiers.sort(
-                (a, b) =>
-                  calculateSpecifierSortIndex(a) -
-                  calculateSpecifierSortIndex(b)
-              )
+            const sortedSpecifiers = specifiers.sort(
+              (a, b) =>
+                calculateSpecifierSortIndex(a) - calculateSpecifierSortIndex(b)
             );
 
-            const sortedImportsText = nodesArrayToText(sourceCode)(
-              imports,
+            const sortedSpecifiersText = nodesArrayToText(sourceCode)(
+              sortedSpecifiers,
               // do not add additional \n to the end of imports
               (source, index) =>
-                index < imports.length - 1 ? source + "\n" : source
+                index < sortedSpecifiers.length - 1 ? source + ", " : source
             );
 
             return fixer.replaceTextRange(
-              [importsStart, importsEnd],
-              sortedImportsText
+              [specifiersStart, specifiersEnd],
+              sortedSpecifiersText
             );
           };
 
           context.report({
             fix: autoFix,
             loc: firstNotSorted.loc!,
-            message: messages.NOT_SORTED,
+            message: messages.NOT_SORTED_SPECIFIERS,
           });
         }
       },
