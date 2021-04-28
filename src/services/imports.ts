@@ -1,5 +1,5 @@
 import { SourceCode } from "eslint";
-import { ImportDeclaration } from "estree";
+import { Node, ImportDeclaration } from "estree";
 
 export function getImportType(node?: ImportDeclaration) {
   /* istanbul ignore if */
@@ -21,18 +21,25 @@ export function getImportType(node?: ImportDeclaration) {
   return node.specifiers[0].type;
 }
 
+export type CalculateSortOpts = {
+  sortBySpecifier?: boolean;
+  disableLineSorts: boolean;
+};
+
 export const createCalculateSortIndex = (
   sourceCode: SourceCode,
-  options: {
-    disableLineSorts: boolean;
-  }
+  options: CalculateSortOpts
 ) => (node?: ImportDeclaration) => {
   const includeLineLength = (initialIndex: number) => {
-    if (options.disableLineSorts) {
+    if (!node || options.disableLineSorts) {
       return initialIndex;
     }
 
-    const lineLengthIndex = sourceCode.getText(node).length / 100;
+    const criterion = options.sortBySpecifier
+      ? getSpecifiersLength(node, sourceCode)
+      : getImportLength(node, sourceCode);
+
+    const lineLengthIndex = criterion / 100;
     return initialIndex + lineLengthIndex;
   };
 
@@ -49,3 +56,18 @@ export const createCalculateSortIndex = (
       return 100;
   }
 };
+
+function getSpecifiersLength(node: ImportDeclaration, sourceCode: SourceCode) {
+  return node.specifiers.reduce(
+    (length: number, node: Node) => getNodeLength(node, sourceCode) + length,
+    0
+  );
+}
+
+function getImportLength(node: ImportDeclaration, sourceCode: SourceCode) {
+  return getNodeLength(node, sourceCode);
+}
+
+function getNodeLength(node: Node, sourceCode: SourceCode) {
+  return sourceCode.getText(node).length;
+}

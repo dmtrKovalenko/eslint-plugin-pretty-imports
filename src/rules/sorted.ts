@@ -5,28 +5,30 @@ import { createCalculateSortIndex } from "../services/imports";
 import { nodesArrayToText, getNodeEndPosition } from "../services/eslint";
 
 const opts = {
-  DISABLE_LINE_SORTS: "no-line-length-sort"
+  SORT_BY_SPECIFIER: "sort-by-specifiers-length",
+  DISABLE_LINE_SORTS: "no-line-length-sort",
 };
 
 export default {
   meta: {
-    fixable: "code"
+    fixable: "code",
   },
   schema: [
     {
-      enum: [opts.DISABLE_LINE_SORTS]
-    }
+      enum: [opts.DISABLE_LINE_SORTS, opts.SORT_BY_SPECIFIER],
+    },
   ],
   create: (context: Rule.RuleContext) => {
     const sourceCode = context.getSourceCode();
     const calculateSortIndex = createCalculateSortIndex(sourceCode, {
-      disableLineSorts: context.options.includes(opts.DISABLE_LINE_SORTS)
+      sortBySpecifier: context.options.includes(opts.SORT_BY_SPECIFIER),
+      disableLineSorts: context.options.includes(opts.DISABLE_LINE_SORTS),
     });
 
     return {
       Program: (program: Program) => {
         const imports = program.body.filter(
-          node => node.type === "ImportDeclaration"
+          (node) => node.type === "ImportDeclaration"
         ) as ImportDeclaration[];
 
         if (!imports.length) {
@@ -69,10 +71,10 @@ export default {
           context.report({
             fix: autoFix,
             loc: firstNotSorted.loc!,
-            message: messages.NOT_SORTED
+            message: messages.NOT_SORTED,
           });
         }
-      }
+      },
     } as Rule.RuleListener;
-  }
+  },
 } as Rule.RuleModule;
