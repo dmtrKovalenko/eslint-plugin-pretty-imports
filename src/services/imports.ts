@@ -1,6 +1,7 @@
 import { SourceCode } from "eslint";
 import {
   Node,
+  Program,
   ImportSpecifier,
   ImportDeclaration,
   ImportDefaultSpecifier,
@@ -18,6 +19,25 @@ export type CalculateSortOpts = {
   sortBySpecifier?: boolean;
   disableLineSorts: boolean;
 };
+
+export function getImportsWithNodesBetween(program: Program) {
+  const nodes = [];
+
+  for (let i = 0, lastMatchedIndex = null; i < program.body.length; i++) {
+    const node = program.body[i];
+    if (node.type !== "ImportDeclaration") continue;
+
+    if (lastMatchedIndex !== null && lastMatchedIndex !== i - 1) {
+      nodes.push(...program.body.slice(lastMatchedIndex + 1, i + 1));
+    } else {
+      nodes.push(node);
+    }
+
+    lastMatchedIndex = i;
+  }
+
+  return nodes;
+}
 
 export function getImportType(node?: ImportDeclaration) {
   /* istanbul ignore if */

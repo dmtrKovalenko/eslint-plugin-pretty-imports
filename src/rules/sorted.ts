@@ -5,6 +5,7 @@ import { nodesArrayToText, getNodeEndPosition } from "../services/eslint";
 import {
   getFirstNotSorted,
   createCalculateSortIndex,
+  getImportsWithNodesBetween,
 } from "../services/imports";
 
 const opts = {
@@ -34,15 +35,16 @@ export default {
 
     return {
       Program: (program: Program) => {
-        const imports = program.body.filter(
-          (node) => node.type === "ImportDeclaration"
-        ) as ImportDeclaration[];
+        const imports = getImportsWithNodesBetween(program);
 
         if (!imports.length) {
           return;
         }
 
-        const firstNotSorted = getFirstNotSorted(imports, calculateSortIndex);
+        const firstNotSorted = getFirstNotSorted(
+          imports as ImportDeclaration[],
+          calculateSortIndex
+        );
 
         if (firstNotSorted) {
           const autoFix = (fixer: Rule.RuleFixer) => {
@@ -52,7 +54,7 @@ export default {
               imports[imports.length - 1]
             );
 
-            const sortedImports = imports.sort(
+            const sortedImports = (imports as ImportDeclaration[]).sort(
               (a, b) => calculateSortIndex(a) - calculateSortIndex(b)
             );
 
