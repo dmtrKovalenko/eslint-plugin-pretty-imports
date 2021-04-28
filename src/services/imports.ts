@@ -58,10 +58,13 @@ export const createCalculateSortIndex = (
 };
 
 function getSpecifiersLength(node: ImportDeclaration, sourceCode: SourceCode) {
-  return node.specifiers.reduce(
-    (length: number, node: Node) => getNodeLength(node, sourceCode) + length,
+  const commaLength = 1;
+  const specifiersLength = node.specifiers.reduce(
+    (length: number, node: Node) =>
+      getNodeLength(node, sourceCode) + commaLength + length,
     0
   );
+  return specifiersLength - commaLength;
 }
 
 function getImportLength(node: ImportDeclaration, sourceCode: SourceCode) {
