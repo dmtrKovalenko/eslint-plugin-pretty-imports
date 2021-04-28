@@ -9,9 +9,9 @@ ruleTester.run("sorted", rule, {
 import * as smth from 'smth'
 import React from 'react'
 import { imports } from './another_module'
-import { named, exported } from './some_module'
+import { exported, named } from './some_module'
 import { shouldBeAligned } from './super_another_module'
-`
+`,
   ],
   invalid: [
     {
@@ -35,18 +35,18 @@ import { imports, andAlsoLongImportsThatTakesSpace } from './another_module'
 const five = 5`,
       errors: [
         {
-          message: messages.NOT_SORTED
-        }
-      ]
-    }
-  ]
+          message: messages.NOT_SORTED,
+        },
+      ],
+    },
+  ],
 });
 
 ruleTester.run("sorted with comments", rule, {
   valid: [
     `
 import React from 'react'
-import { imports } from './another_module'`
+import { imports } from './another_module'`,
   ],
   invalid: [
     {
@@ -65,9 +65,9 @@ import { /* named, */ Import } from './some_module'
 const five = 5`,
       errors: [
         {
-          message: messages.NOT_SORTED
-        }
-      ]
-    }
-  ]
+          message: messages.NOT_SORTED,
+        },
+      ],
+    },
+  ],
 });

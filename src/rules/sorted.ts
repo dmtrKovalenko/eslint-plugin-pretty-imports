@@ -1,12 +1,17 @@
 import { Rule } from "eslint";
 import { messages } from "../constants/messages";
 import { Program, ImportDeclaration } from "estree";
-import { createCalculateSortIndex } from "../services/imports";
 import { nodesArrayToText, getNodeEndPosition } from "../services/eslint";
+import {
+  getFirstNotSorted,
+  createCalculateSortIndex,
+  createCalculateSpecifierSortIndex,
+} from "../services/imports";
 
 const opts = {
   SORT_BY_SPECIFIER: "sort-by-specifiers-length",
   DISABLE_LINE_SORTS: "no-line-length-sort",
+  SORT_SPECIFIERS_BY_LENGTH: "sort-specifiers-by-length",
 };
 
 export default {
@@ -20,9 +25,20 @@ export default {
   ],
   create: (context: Rule.RuleContext) => {
     const sourceCode = context.getSourceCode();
+
+    const sortBySpecifier = context.options.includes(opts.SORT_BY_SPECIFIER);
+    const disableLineSorts = context.options.includes(opts.DISABLE_LINE_SORTS);
+    const sortSpecifiers = context.options.includes(
+      opts.SORT_SPECIFIERS_BY_LENGTH
+    );
+
+    const calculateSpecifierSortIndex = !sortBySpecifier
+      ? undefined
+      : createCalculateSpecifierSortIndex(sourceCode);
+
     const calculateSortIndex = createCalculateSortIndex(sourceCode, {
-      sortBySpecifier: context.options.includes(opts.SORT_BY_SPECIFIER),
-      disableLineSorts: context.options.includes(opts.DISABLE_LINE_SORTS),
+      sortBySpecifier,
+      disableLineSorts,
     });
 
     return {
@@ -35,13 +51,11 @@ export default {
           return;
         }
 
-        const firstNotSorted = imports.find((node, i) => {
-          const nextNode = imports[i + 1];
-
-          return (
-            nextNode && calculateSortIndex(node) > calculateSortIndex(nextNode)
-          );
-        });
+        const firstNotSorted = getFirstNotSorted(
+          imports,
+          calculateSortIndex,
+          calculateSpecifierSortIndex
+        );
 
         if (firstNotSorted) {
           const autoFix = (fixer: Rule.RuleFixer) => {
@@ -54,6 +68,16 @@ export default {
             const sortedImports = imports.sort(
               (a, b) => calculateSortIndex(a) - calculateSortIndex(b)
             );
+
+            if (calculateSpecifierSortIndex) {
+              sortedImports.forEach((node) =>
+                node.specifiers.sort(
+                  (a, b) =>
+                    calculateSpecifierSortIndex(a) -
+                    calculateSpecifierSortIndex(b)
+                )
+              );
+            }
 
             const sortedImportsText = nodesArrayToText(sourceCode)(
               sortedImports,

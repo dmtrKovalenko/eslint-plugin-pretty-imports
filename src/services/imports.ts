@@ -1,5 +1,23 @@
 import { SourceCode } from "eslint";
-import { Node, ImportDeclaration } from "estree";
+import {
+  Node,
+  ImportSpecifier,
+  ImportDeclaration,
+  ImportDefaultSpecifier,
+  ImportNamespaceSpecifier,
+} from "estree";
+
+const DEFAULT_SORT_INDEX = 100;
+
+type ImportSpecifierNode =
+  | ImportSpecifier
+  | ImportDefaultSpecifier
+  | ImportNamespaceSpecifier;
+
+export type CalculateSortOpts = {
+  sortBySpecifier?: boolean;
+  disableLineSorts: boolean;
+};
 
 export function getImportType(node?: ImportDeclaration) {
   /* istanbul ignore if */
@@ -21,10 +39,37 @@ export function getImportType(node?: ImportDeclaration) {
   return node.specifiers[0].type;
 }
 
-export type CalculateSortOpts = {
-  sortBySpecifier?: boolean;
-  disableLineSorts: boolean;
-};
+export function getFirstNotSorted(
+  imports: ImportDeclaration[],
+  calculateSortIndex: (node?: ImportDeclaration) => number,
+  calculateSpecifierSortIndex?: (node?: ImportSpecifierNode) => number
+) {
+  const isImportsSorted = (a: ImportDeclaration, b: ImportDeclaration) =>
+    calculateSortIndex(a) <= calculateSortIndex(b);
+
+  const isSpecifiersSorted = (a: ImportSpecifierNode, b: ImportSpecifierNode) =>
+    calculateSpecifierSortIndex!(a) <= calculateSpecifierSortIndex!(b);
+
+  const hasNotSortedSpecifiers = (node: ImportDeclaration) =>
+    calculateSpecifierSortIndex !== undefined &&
+    node.specifiers.some((current, i) => {
+      const next = node.specifiers[i + 1];
+      return next && !isSpecifiersSorted(current, next);
+    });
+
+  return imports.find((current, i) => {
+    if (hasNotSortedSpecifiers(current)) return true;
+
+    const next = imports[i + 1];
+    if (next === undefined) return false;
+
+    return !isImportsSorted(current, next);
+  });
+}
+
+export const createCalculateSpecifierSortIndex = (sourceCode: SourceCode) => (
+  node?: ImportSpecifierNode
+) => (node ? getNodeLength(node, sourceCode) : DEFAULT_SORT_INDEX);
 
 export const createCalculateSortIndex = (
   sourceCode: SourceCode,
@@ -53,9 +98,17 @@ export const createCalculateSortIndex = (
     case "ImportSpecifier":
       return includeLineLength(4);
     default:
-      return 100;
+      return DEFAULT_SORT_INDEX;
   }
 };
+
+function getImportLength(node: ImportDeclaration, sourceCode: SourceCode) {
+  return getNodeLength(node, sourceCode);
+}
+
+function getNodeLength(node: Node, sourceCode: SourceCode) {
+  return sourceCode.getText(node).length;
+}
 
 function getSpecifiersLength(node: ImportDeclaration, sourceCode: SourceCode) {
   const commaLength = 1;
@@ -65,12 +118,4 @@ function getSpecifiersLength(node: ImportDeclaration, sourceCode: SourceCode) {
     0
   );
   return specifiersLength - commaLength;
-}
-
-function getImportLength(node: ImportDeclaration, sourceCode: SourceCode) {
-  return getNodeLength(node, sourceCode);
-}
-
-function getNodeLength(node: Node, sourceCode: SourceCode) {
-  return sourceCode.getText(node).length;
 }
