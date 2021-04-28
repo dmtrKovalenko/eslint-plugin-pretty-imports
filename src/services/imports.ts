@@ -39,37 +39,28 @@ export function getImportType(node?: ImportDeclaration) {
   return node.specifiers[0].type;
 }
 
-export function getFirstNotSorted(
-  imports: ImportDeclaration[],
-  calculateSortIndex: (node?: ImportDeclaration) => number,
-  calculateSpecifierSortIndex?: (node?: ImportSpecifierNode) => number
+export function getFirstNotSorted<T extends Node>(
+  imports: T[],
+  calculateSortIndex: (node?: T) => number
 ) {
-  const isImportsSorted = (a: ImportDeclaration, b: ImportDeclaration) =>
+  const isNodesSorted = (a: T, b: T) =>
     calculateSortIndex(a) <= calculateSortIndex(b);
 
-  const isSpecifiersSorted = (a: ImportSpecifierNode, b: ImportSpecifierNode) =>
-    calculateSpecifierSortIndex!(a) <= calculateSpecifierSortIndex!(b);
-
-  const hasNotSortedSpecifiers = (node: ImportDeclaration) =>
-    calculateSpecifierSortIndex !== undefined &&
-    node.specifiers.some((current, i) => {
-      const next = node.specifiers[i + 1];
-      return next && !isSpecifiersSorted(current, next);
-    });
-
   return imports.find((current, i) => {
-    if (hasNotSortedSpecifiers(current)) return true;
-
     const next = imports[i + 1];
     if (next === undefined) return false;
 
-    return !isImportsSorted(current, next);
+    return !isNodesSorted(current, next);
   });
 }
 
-export const createCalculateSpecifierSortIndex = (sourceCode: SourceCode) => (
-  node?: ImportSpecifierNode
-) => (node ? getNodeLength(node, sourceCode) : DEFAULT_SORT_INDEX);
+export const createCalculateSpecifierSortIndex = (
+  sourceCode: SourceCode,
+  options: CalculateSortOpts
+) => (node?: ImportSpecifierNode) =>
+  node && !options.disableLineSorts
+    ? getNodeLength(node, sourceCode)
+    : DEFAULT_SORT_INDEX;
 
 export const createCalculateSortIndex = (
   sourceCode: SourceCode,

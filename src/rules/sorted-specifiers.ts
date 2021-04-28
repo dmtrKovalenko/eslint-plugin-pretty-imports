@@ -4,12 +4,11 @@ import { Program, ImportDeclaration } from "estree";
 import { nodesArrayToText, getNodeEndPosition } from "../services/eslint";
 import {
   getFirstNotSorted,
-  createCalculateSortIndex,
+  createCalculateSpecifierSortIndex,
 } from "../services/imports";
 
 const opts = {
   DISABLE_LINE_SORTS: "no-line-length-sort",
-  SORT_BY_SPECIFIER: "sort-by-specifiers-length",
 };
 
 export default {
@@ -18,19 +17,18 @@ export default {
   },
   schema: [
     {
-      enum: [opts.DISABLE_LINE_SORTS, opts.SORT_BY_SPECIFIER],
+      enum: [opts.DISABLE_LINE_SORTS],
     },
   ],
   create: (context: Rule.RuleContext) => {
     const sourceCode = context.getSourceCode();
 
-    const sortBySpecifier = context.options.includes(opts.SORT_BY_SPECIFIER);
     const disableLineSorts = context.options.includes(opts.DISABLE_LINE_SORTS);
 
-    const calculateSortIndex = createCalculateSortIndex(sourceCode, {
-      sortBySpecifier,
-      disableLineSorts,
-    });
+    const calculateSpecifierSortIndex = createCalculateSpecifierSortIndex(
+      sourceCode,
+      { disableLineSorts }
+    );
 
     return {
       Program: (program: Program) => {
@@ -42,7 +40,9 @@ export default {
           return;
         }
 
-        const firstNotSorted = getFirstNotSorted(imports, calculateSortIndex);
+        const firstNotSorted = imports.find((node) =>
+          getFirstNotSorted(node.specifiers, calculateSpecifierSortIndex)
+        );
 
         if (firstNotSorted) {
           const autoFix = (fixer: Rule.RuleFixer) => {
@@ -52,15 +52,19 @@ export default {
               imports[imports.length - 1]
             );
 
-            const sortedImports = imports.sort(
-              (a, b) => calculateSortIndex(a) - calculateSortIndex(b)
+            imports.forEach((node) =>
+              node.specifiers.sort(
+                (a, b) =>
+                  calculateSpecifierSortIndex(a) -
+                  calculateSpecifierSortIndex(b)
+              )
             );
 
             const sortedImportsText = nodesArrayToText(sourceCode)(
-              sortedImports,
+              imports,
               // do not add additional \n to the end of imports
               (source, index) =>
-                index < sortedImports.length - 1 ? source + "\n" : source
+                index < imports.length - 1 ? source + "\n" : source
             );
 
             return fixer.replaceTextRange(
