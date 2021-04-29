@@ -20,12 +20,16 @@ export type CalculateSortOpts = {
   disableLineSorts: boolean;
 };
 
+export function isImportDeclaration(node: Node): node is ImportDeclaration {
+  return node.type === "ImportDeclaration";
+}
+
 export function getImportsWithNodesBetween(program: Program) {
   const nodes = [];
 
   for (let i = 0, lastMatchedIndex = null; i < program.body.length; i++) {
     const node = program.body[i];
-    if (node.type !== "ImportDeclaration") continue;
+    if (!isImportDeclaration(node)) continue;
 
     if (lastMatchedIndex !== null && lastMatchedIndex !== i - 1) {
       nodes.push(...program.body.slice(lastMatchedIndex + 1, i + 1));
@@ -47,7 +51,7 @@ export function getImportType(node?: ImportDeclaration) {
   }
 
   if (!node.specifiers || !node.specifiers.length) {
-    if (node.type === "ImportDeclaration") {
+    if (isImportDeclaration(node)) {
       return "ImportFileSpecifier";
     }
 

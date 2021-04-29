@@ -4,6 +4,7 @@ import { Program, ImportDeclaration } from "estree";
 import { nodesArrayToText, getNodeEndPosition } from "../services/eslint";
 import {
   getFirstNotSorted,
+  isImportDeclaration,
   createCalculateSortIndex,
   getImportsWithNodesBetween,
 } from "../services/imports";
@@ -58,11 +59,26 @@ export default {
               (a, b) => calculateSortIndex(a) - calculateSortIndex(b)
             );
 
+            let metNonImportNode = false;
+
+            // do not add additional \n to the end of imports
+            const addSeparatorBetweenNodes = (
+              source: string,
+              index: number
+            ) => {
+              const node = sortedImports[index];
+
+              if (!metNonImportNode && !isImportDeclaration(node)) {
+                metNonImportNode = true;
+                source = "\n" + source;
+              }
+
+              return index < sortedImports.length - 1 ? source + "\n" : source;
+            };
+
             const sortedImportsText = nodesArrayToText(sourceCode)(
               sortedImports,
-              // do not add additional \n to the end of imports
-              (source, index) =>
-                index < sortedImports.length - 1 ? source + "\n" : source
+              addSeparatorBetweenNodes
             );
 
             return fixer.replaceTextRange(
