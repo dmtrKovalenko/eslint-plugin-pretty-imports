@@ -40,7 +40,7 @@ export function getImportsWithNodesBetween(program: Program) {
     lastMatchedIndex = i;
   }
 
-  return nodes;
+  return nodes as ImportDeclaration[];
 }
 
 export function getImportType(node?: ImportDeclaration) {
@@ -76,6 +76,24 @@ export function getFirstNotSorted<T extends Node>(
 
     return !isNodesSorted(current, next);
   });
+}
+
+function getNodeLength(node: Node, sourceCode: SourceCode) {
+  return sourceCode.getText(node).length;
+}
+
+function getImportLength(node: ImportDeclaration, sourceCode: SourceCode) {
+  return getNodeLength(node, sourceCode);
+}
+
+function getSpecifiersLength(node: ImportDeclaration, sourceCode: SourceCode) {
+  const commaLength = 1;
+  const specifiersLength = node.specifiers.reduce(
+    (length: number, node: Node) =>
+      getNodeLength(node, sourceCode) + commaLength + length,
+    0
+  );
+  return specifiersLength - commaLength;
 }
 
 export const createCalculateSpecifierSortIndex = (
@@ -116,21 +134,3 @@ export const createCalculateSortIndex = (
       return DEFAULT_SORT_INDEX;
   }
 };
-
-function getImportLength(node: ImportDeclaration, sourceCode: SourceCode) {
-  return getNodeLength(node, sourceCode);
-}
-
-function getNodeLength(node: Node, sourceCode: SourceCode) {
-  return sourceCode.getText(node).length;
-}
-
-function getSpecifiersLength(node: ImportDeclaration, sourceCode: SourceCode) {
-  const commaLength = 1;
-  const specifiersLength = node.specifiers.reduce(
-    (length: number, node: Node) =>
-      getNodeLength(node, sourceCode) + commaLength + length,
-    0
-  );
-  return specifiersLength - commaLength;
-}

@@ -2,19 +2,19 @@ module.exports = {
   parser: "@typescript-eslint/parser",
   parserOptions: {
     ecmaVersion: 6,
-    sourceType: "module"
+    sourceType: "module",
   },
   extends: [
     "plugin:@typescript-eslint/recommended",
-    "prettier/@typescript-eslint"
+    "prettier/@typescript-eslint",
   ],
   plugins: ["pretty-imports", "@typescript-eslint"],
   rules: {
     "pretty-imports/sorted": "warn", // ❤️
-    "@typescript-eslint/explicit-function-return-type": 0,
-    "@typescript-eslint/explicit-member-accessibility": 0,
-    "@typescript-eslint/no-non-null-assertion": 0,
-    "@typescript-eslint/no-explicit-any": 0,
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/explicit-member-accessibility": "off",
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/no-use-before-define": "warn",
     "@typescript-eslint/no-unused-vars": [
       "error",
@@ -22,8 +22,8 @@ module.exports = {
         vars: "all",
         args: "after-used",
         argsIgnorePattern: "^_",
-        ignoreRestSiblings: true
-      }
-    ]
-  }
+        ignoreRestSiblings: true,
+      },
+    ],
+  },
 };

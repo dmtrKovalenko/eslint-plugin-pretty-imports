@@ -1,5 +1,5 @@
-import rule from "../../src/rules/sorted";
 import ruleTester from "../rule-tester";
+import rule from "../../src/rules/sorted";
 import { messages } from "../../src/constants/messages";
 
 ruleTester.run("sorted (sort-by-specifiers-length)", rule, {

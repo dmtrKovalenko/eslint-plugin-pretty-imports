@@ -26,26 +26,19 @@ export default {
   create: (context: Rule.RuleContext) => {
     const sourceCode = context.getSourceCode();
 
-    const sortBySpecifier = context.options.includes(opts.SORT_BY_SPECIFIER);
-    const disableLineSorts = context.options.includes(opts.DISABLE_LINE_SORTS);
-
     const calculateSortIndex = createCalculateSortIndex(sourceCode, {
-      sortBySpecifier,
-      disableLineSorts,
+      sortBySpecifier: context.options.includes(opts.SORT_BY_SPECIFIER),
+      disableLineSorts: context.options.includes(opts.DISABLE_LINE_SORTS),
     });
 
     return {
       Program: (program: Program) => {
         const imports = getImportsWithNodesBetween(program);
-
         if (!imports.length) {
           return;
         }
 
-        const firstNotSorted = getFirstNotSorted(
-          imports as ImportDeclaration[],
-          calculateSortIndex
-        );
+        const firstNotSorted = getFirstNotSorted(imports, calculateSortIndex);
 
         if (firstNotSorted) {
           const autoFix = (fixer: Rule.RuleFixer) => {

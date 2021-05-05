@@ -1,6 +1,6 @@
 import { Rule } from "eslint";
-import { messages } from "../constants/messages";
 import { ImportDeclaration } from "estree";
+import { messages } from "../constants/messages";
 import { nodesArrayToText, getNodeEndPosition } from "../services/eslint";
 import {
   getFirstNotSorted,
@@ -40,7 +40,7 @@ export default {
 
         if (firstNotSorted) {
           const autoFix = (fixer: Rule.RuleFixer) => {
-            const specifiersStart = specifiers[0].range![0];
+            const specifiersStart = specifiers[0].range?.[0] ?? 0;
             const specifiersEnd = getNodeEndPosition(
               sourceCode,
               specifiers[specifiers.length - 1]
