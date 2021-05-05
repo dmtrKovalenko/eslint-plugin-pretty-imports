@@ -40,6 +40,7 @@ export default {
 
         if (firstNotSorted) {
           const autoFix = (fixer: Rule.RuleFixer) => {
+            /* istanbul ignore next */
             const specifiersStart = specifiers[0].range?.[0] ?? 0;
             const specifiersEnd = getNodeEndPosition(
               sourceCode,

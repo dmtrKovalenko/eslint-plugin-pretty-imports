@@ -45,7 +45,6 @@ export function getImportsWithNodesBetween(program: Program) {
 
 export function getImportType(node?: ImportDeclaration) {
   /* istanbul ignore if */
-
   if (!node) {
     return null;
   }
@@ -102,7 +101,8 @@ export const createCalculateSpecifierSortIndex = (
 ) => (node?: ImportSpecifierNode) =>
   node && !options.disableLineSorts
     ? getNodeLength(node, sourceCode)
-    : DEFAULT_SORT_INDEX;
+    : /* istanbul ignore next */
+      DEFAULT_SORT_INDEX;
 
 export const createCalculateSortIndex = (
   sourceCode: SourceCode,

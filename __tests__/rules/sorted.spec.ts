@@ -1,5 +1,5 @@
-import rule from "../../src/rules/sorted";
 import ruleTester from "../rule-tester";
+import rule from "../../src/rules/sorted";
 import { messages } from "../../src/constants/messages";
 
 ruleTester.run("sorted", rule, {
@@ -71,3 +71,41 @@ const five = 5`,
     },
   ],
 });
+
+ruleTester.run(
+  "non imports nodes between imports gets moved after imports",
+  rule,
+  {
+    valid: [
+      `
+import React from 'react'
+import { imports } from './another_module'
+
+const a = 5;
+`,
+    ],
+    invalid: [
+      {
+        // ensure that comments are moved properly
+        code: `
+import React from 'react'
+const a = 5;
+import { imports } from './another_module'
+
+`,
+        output: `
+import React from 'react'
+import { imports } from './another_module'
+
+const a = 5;
+
+`,
+        errors: [
+          {
+            message: messages.NOT_SORTED,
+          },
+        ],
+      },
+    ],
+  }
+);
