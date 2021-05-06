@@ -90,7 +90,7 @@ This plugin provides only 1 rule, that fully takes care of your imports. But you
 
 ```json
 "rules": {
-  "pretty-imports/sorted": "warn" // or ["warn", ...options (see below)]
+  "pretty-imports/sorted": ["warn", "sort-by-specifiers-length"]
 }
 ```
 
