@@ -33,7 +33,7 @@
     "@types/node": "11.15.54",
     "@typescript-eslint/eslint-plugin": "4.28.3",
     "@typescript-eslint/parser": "4.28.3",
-    "codecov": "3.8.2",
+    "codecov": "3.8.3",
     "eslint": "7.31.0",
     "eslint-config-prettier": "6.15.0",
     "eslint-plugin-pretty-imports": "1.3.0",
