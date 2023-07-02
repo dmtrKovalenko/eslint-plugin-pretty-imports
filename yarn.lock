@@ -2,6 +2,11 @@
 # yarn lockfile v1
 
 
+"@aashutoshrathi/word-wrap@^1.2.3":
+  version "1.2.6"
+  resolved "https://registry.yarnpkg.com/@aashutoshrathi/word-wrap/-/word-wrap-1.2.6.tgz#bd9154aec9983f77b3a034ecaa015c2e4201f6cf"
+  integrity sha512-1Yjs2SvM8TflER/OD3cOjhWWOZb58A2t7wpE2S9XfBYTiIl+XFhQG2bjy4Pu1I+EAlCNUzRDYDdFwFYUKvXcIA==
+
 "@ampproject/remapping@^2.2.0":
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/@ampproject/remapping/-/remapping-2.2.1.tgz#99e8e11851128b8702cd57c33684f1d0f260b630"
@@ -699,9 +704,9 @@
   integrity sha512-K0VQKziLUWkVKiRVrx4a40iPaxTUefQmjtkQofBkYRcoaaL/8rhwDWww9qWbrgicNOgnpIsMxyNIUM4+n6dUIA==
 
 "@types/node@*":
-  version "20.3.1"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-20.3.1.tgz#e8a83f1aa8b649377bb1fb5d7bac5cb90e784dfe"
-  integrity sha512-EhcH/wvidPy1WeML3TtYFGR83UzjxeWRen9V402T8aUGYsCHOmfoisV3ZSg03gAFIbLq8TnWOJ0f4cALtnSEUg==
+  version "20.3.3"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-20.3.3.tgz#329842940042d2b280897150e023e604d11657d6"
+  integrity sha512-wheIYdr4NYML61AjC8MKj/2jrR/kDQri/CIpVoZwldwhnIrD/j9jIU5bJ8yBKuB2VhpFV7Ab6G2XkBjv9r9Zzw==
 
 "@types/node@18.16.19":
   version "18.16.19"
@@ -1196,9 +1201,9 @@ camelcase@^6.0.0:
   integrity sha512-Gmy6FhYlCY7uOElZUSbxo2UCDH8owEk996gkbrpsgGtrJLM3J7jGxl9Ic7Qwwj4ivOE5AWZWRMecDdF7hqGjFA==
 
 caniuse-lite@^1.0.30001503:
-  version "1.0.30001507"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001507.tgz#fae53f6286e7564783eadea9b447819410a59534"
-  integrity sha512-SFpUDoSLCaE5XYL2jfqe9ova/pbQHEmbheDf5r4diNwbAgR3qxM9NQtfsiSscjqoya5K7kFcHPUQ+VsUkIJR4A==
+  version "1.0.30001510"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001510.tgz#077b7ceba430473142ffd47ed89a78bd7b10075f"
+  integrity sha512-z35lD6xjHklPNgjW4P68R30Er5OCIZE0C1bUf8IMXSh34WJYXfIy+GxIEraQXYJ2dvTU8TumjYAeLrPhpMlsuw==
 
 capture-exit@^2.0.0:
   version "2.0.0"
@@ -1474,7 +1479,7 @@ dedent@^0.7.0:
   resolved "https://registry.yarnpkg.com/dedent/-/dedent-0.7.0.tgz#2495ddbaf6eb874abb0e1be9df22d2e5a544326c"
   integrity sha512-Q6fKUPqnAHAyhiUgFU7BUzLiv0kd8saH9al7tnu5Q/okj6dnupxyTgFIBjVzJATdfIAm9NAsvXNzjaKa+bxVyA==
 
-deep-is@^0.1.3, deep-is@~0.1.3:
+deep-is@^0.1.3:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/deep-is/-/deep-is-0.1.4.tgz#a6f2dce612fadd2ef1f519b73551f17e85199831"
   integrity sha512-oIPzksmTg4/MriiaYGO+okXDT7ztn/w3Eptv/+gSIdMdKsJo0u4CfYNFJPy+4SKMuCqGw2wxnA+URMg3t8a/bQ==
@@ -1557,9 +1562,9 @@ domexception@^2.0.1:
     webidl-conversions "^5.0.0"
 
 electron-to-chromium@^1.4.431:
-  version "1.4.440"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.440.tgz#d3b1eeb36b717eb479a240c0406ac1fa67901762"
-  integrity sha512-r6dCgNpRhPwiWlxbHzZQ/d9swfPaEJGi8ekqRBwQYaR3WmA5VkqQfBWSDDjuJU1ntO+W9tHx8OHV/96Q8e0dVw==
+  version "1.4.447"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.447.tgz#ac69d3a7b3713e9ae94bb30ba65c3114e4d76a38"
+  integrity sha512-sxX0LXh+uL41hSJsujAN86PjhrV/6c79XmpY0TvjZStV6VxIgarf8SRkUoUTuYmFcZQTemsoqo8qXOGw5npWfw==
 
 elegant-spinner@^1.0.1:
   version "1.0.1"
@@ -1618,14 +1623,13 @@ escape-string-regexp@^4.0.0:
   integrity sha512-TtpcNJ3XAzx3Gq8sWRzJaVajRs0uVxA2YAkdb1jm2YkPz4G6egUFAyA3n5vtEIZefPk5Wa4UXbKuS5fKkJWdgA==
 
 escodegen@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/escodegen/-/escodegen-2.0.0.tgz#5e32b12833e8aa8fa35e1bf0befa89380484c7dd"
-  integrity sha512-mmHKys/C8BFUGI+MAWNcSYoORYLMdPzjrknd2Vc+bUsjN5bXcr8EhrNB+UTqfL1y3I9c4fw2ihgtMPQLBRiQxw==
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/escodegen/-/escodegen-2.1.0.tgz#ba93bbb7a43986d29d6041f99f5262da773e2e17"
+  integrity sha512-2NlIDTwUWJN0mRPQOdtQBzbUHvdGY2P1VXSyU83Q3xKxM7WHX2Ql8dKq782Q9TgQUNOLEzEYu9bzLNj1q88I5w==
   dependencies:
     esprima "^4.0.1"
     estraverse "^5.2.0"
     esutils "^2.0.2"
-    optionator "^0.8.1"
   optionalDependencies:
     source-map "~0.6.1"
 
@@ -1875,9 +1879,9 @@ fast-deep-equal@^3.1.1, fast-deep-equal@^3.1.3:
   integrity sha512-f3qQ9oQy9j2AhBe/H9VC91wLmKBCCU/gDOnKNAYG5hswO7BLKj09Hc5HYNz9cGI++xlpDCIgDaitVs03ATR84Q==
 
 fast-glob@^3.0.3, fast-glob@^3.2.9:
-  version "3.2.12"
-  resolved "https://registry.yarnpkg.com/fast-glob/-/fast-glob-3.2.12.tgz#7f39ec99c2e6ab030337142da9e0c18f37afae80"
-  integrity sha512-DVj4CQIYYow0BlaelwK1pHl5n5cRSJfM60UA0zK891sVInoPri2Ekj7+e1CT3/3qxXenpI+nBBmQAcJPJgaj4w==
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/fast-glob/-/fast-glob-3.3.0.tgz#7c40cb491e1e2ed5664749e87bfb516dbe8727c0"
+  integrity sha512-ChDuvbOypPuNjO8yIDf36x7BlZX1smcUMTTcyoIjycexOxd6DFsKsg21qVBzEmr3G7fUKIRy2/psii+CIUt7FA==
   dependencies:
     "@nodelib/fs.stat" "^2.0.2"
     "@nodelib/fs.walk" "^1.2.3"
@@ -1890,7 +1894,7 @@ fast-json-stable-stringify@2.x, fast-json-stable-stringify@^2.0.0:
   resolved "https://registry.yarnpkg.com/fast-json-stable-stringify/-/fast-json-stable-stringify-2.1.0.tgz#874bf69c6f404c2b5d99c481341399fd55892633"
   integrity sha512-lhd/wF+Lk98HZoTCtlVraHtfh5XYijIjalXck7saUtuanSDyLMxnHhSXEDJqHxD7msR8D0uCmqlkwjCV8xvwHw==
 
-fast-levenshtein@^2.0.6, fast-levenshtein@~2.0.6:
+fast-levenshtein@^2.0.6:
   version "2.0.6"
   resolved "https://registry.yarnpkg.com/fast-levenshtein/-/fast-levenshtein-2.0.6.tgz#3d8a5c66883a16a30ca8643e851f19baa7797917"
   integrity sha512-DCXu6Ifhqcks7TZKY3Hxp3y6qphY5SJZmrWMDrKcERSOXWQdMhU9Ig/PYrzyw/ul9jOIyh0N4M0tbC5hodg8dw==
@@ -3082,14 +3086,6 @@ levn@^0.4.1:
     prelude-ls "^1.2.1"
     type-check "~0.4.0"
 
-levn@~0.3.0:
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/levn/-/levn-0.3.0.tgz#3b09924edf9f083c0490fdd4c0bc4421e04764ee"
-  integrity sha512-0OO4y2iOHix2W6ujICbKIaEQXvFQHue65vUG3pb5EUomzPI90z9hsA1VsO/dbIIpC53J8gxM9Q4Oho0jrCM/yA==
-  dependencies:
-    prelude-ls "~1.1.2"
-    type-check "~0.3.2"
-
 lines-and-columns@^1.1.6:
   version "1.2.4"
   resolved "https://registry.yarnpkg.com/lines-and-columns/-/lines-and-columns-1.2.4.tgz#eca284f75d2965079309dc0ad9255abb2ebc1632"
@@ -3371,9 +3367,9 @@ nice-try@^1.0.4:
   integrity sha512-1nh45deeb5olNY7eX82BkPO7SSxR5SSYJiPTrTdFUVYwAl8CKMA5N9PjTYkHiRjisVcxcQ1HXdLhx2qxxJzLNQ==
 
 node-fetch@^2.6.1:
-  version "2.6.11"
-  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.11.tgz#cde7fc71deef3131ef80a738919f999e6edfff25"
-  integrity sha512-4I6pdBY1EthSqDmJkiNk3JIT8cswwR9nfeW/cPdUagJYEQG7R95WRH74wpz7ma8Gh/9dI9FP+OU+0E4FvtA55w==
+  version "2.6.12"
+  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.12.tgz#02eb8e22074018e3d5a83016649d04df0e348fba"
+  integrity sha512-C/fGU2E8ToujUivIO0H+tpQ6HWo4eEmchoPIoXtxCrVghxdKq+QOHqEZW7tuP3KlV3bC8FRMO5nMCC7Zm1VP6g==
   dependencies:
     whatwg-url "^5.0.0"
 
@@ -3501,29 +3497,17 @@ onetime@^5.1.0:
   dependencies:
     mimic-fn "^2.1.0"
 
-optionator@^0.8.1:
-  version "0.8.3"
-  resolved "https://registry.yarnpkg.com/optionator/-/optionator-0.8.3.tgz#84fa1d036fe9d3c7e21d99884b601167ec8fb495"
-  integrity sha512-+IW9pACdk3XWmmTXG8m3upGUJst5XRGzxMRjXzAuJ1XnIFNvfhjjIuYkDvysnPQ7qzqVzLt78BCruntqRhWQbA==
-  dependencies:
-    deep-is "~0.1.3"
-    fast-levenshtein "~2.0.6"
-    levn "~0.3.0"
-    prelude-ls "~1.1.2"
-    type-check "~0.3.2"
-    word-wrap "~1.2.3"
-
 optionator@^0.9.1:
-  version "0.9.1"
-  resolved "https://registry.yarnpkg.com/optionator/-/optionator-0.9.1.tgz#4f236a6373dae0566a6d43e1326674f50c291499"
-  integrity sha512-74RlY5FCnhq4jRxVUPKDaRwrVNXMqsGsiW6AJw4XK8hmtm10wC0ypZBLw5IIp85NZMr91+qd1RvvENwg7jjRFw==
+  version "0.9.3"
+  resolved "https://registry.yarnpkg.com/optionator/-/optionator-0.9.3.tgz#007397d44ed1872fdc6ed31360190f81814e2c64"
+  integrity sha512-JjCoypp+jKn1ttEFExxhetCKeJt9zhAgAve5FXHixTvFDW/5aEktX9bufBKLRRMdU7bNtpLfcGu94B3cdEJgjg==
   dependencies:
+    "@aashutoshrathi/word-wrap" "^1.2.3"
     deep-is "^0.1.3"
     fast-levenshtein "^2.0.6"
     levn "^0.4.1"
     prelude-ls "^1.2.1"
     type-check "^0.4.0"
-    word-wrap "^1.2.3"
 
 p-each-series@^2.1.0:
   version "2.2.0"
@@ -3674,11 +3658,6 @@ prelude-ls@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/prelude-ls/-/prelude-ls-1.2.1.tgz#debc6489d7a6e6b0e7611888cec880337d316396"
   integrity sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==
-
-prelude-ls@~1.1.2:
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/prelude-ls/-/prelude-ls-1.1.2.tgz#21932a549f5e52ffd9a827f570e04be62a97da54"
-  integrity sha512-ESF23V4SKG6lVSGZgYNpbsiaAkdab6ZgOxe52p7+Kid3W3u3bxR4Vfd/o21dmN7jSt0IwgZ4v5MUd26FEtXE9w==
 
 prettier@2.8.8:
   version "2.8.8"
@@ -4435,13 +4414,6 @@ type-check@^0.4.0, type-check@~0.4.0:
   dependencies:
     prelude-ls "^1.2.1"
 
-type-check@~0.3.2:
-  version "0.3.2"
-  resolved "https://registry.yarnpkg.com/type-check/-/type-check-0.3.2.tgz#5884cab512cf1d355e3fb784f30804b2b520db72"
-  integrity sha512-ZCmOJdvOWDBYJlzAoFkC+Q0+bUyEOS1ltgp1MGU03fqHG+dbi9tBFU2Rd9QKiDZFAYrhPh2JUf7rZRIuHRKtOg==
-  dependencies:
-    prelude-ls "~1.1.2"
-
 type-detect@4.0.8:
   version "4.0.8"
   resolved "https://registry.yarnpkg.com/type-detect/-/type-detect-4.0.8.tgz#7646fb5f18871cfbb7749e69bd39a6388eb7450c"
@@ -4652,11 +4624,6 @@ which@^2.0.1, which@^2.0.2:
   integrity sha512-BLI3Tl1TW3Pvl70l3yq3Y64i+awpwXqsGBYWkkqMtnbXgrMD+yj7rhW0kuEDxzJaYXGjEW5ogapKNMEKNMjibA==
   dependencies:
     isexe "^2.0.0"
-
-word-wrap@^1.2.3, word-wrap@~1.2.3:
-  version "1.2.3"
-  resolved "https://registry.yarnpkg.com/word-wrap/-/word-wrap-1.2.3.tgz#610636f6b1f703891bd34771ccb17fb93b47079c"
-  integrity sha512-Hz/mrNwitNRh/HUAtM/VT/5VH+ygD6DV7mYKZAtHOrbs8U7lvPS6xf7EJKMF0uW1KJCl0H701g3ZGus+muE5vQ==
 
 wrap-ansi@^3.0.1:
   version "3.0.1"
