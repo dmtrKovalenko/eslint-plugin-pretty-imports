@@ -692,10 +692,10 @@
   dependencies:
     undici-types "~6.19.2"
 
-"@types/node@18.19.55":
-  version "18.19.55"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-18.19.55.tgz#29c3f8e1485a92ec96636957ddec55aabc6e856e"
-  integrity sha512-zzw5Vw52205Zr/nmErSEkN5FLqXPuKX/k5d1D7RKHATGqU7y6YfX9QxZraUzUrFGqH6XzOzG196BC35ltJC4Cw==
+"@types/node@18.19.63":
+  version "18.19.63"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-18.19.63.tgz#2b2cdb8b3bd2b739ae38c5676cd012c80568022f"
+  integrity sha512-hcUB7THvrGmaEcPcvUZCZtQ2Z3C+UR/aOcraBLCvTsFMh916Gc1kCCYcfcMuB76HM2pSerxl1PoP3KnmHzd9Lw==
   dependencies:
     undici-types "~5.26.4"
 
